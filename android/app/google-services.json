@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "605324577339",
+    "project_id": "limitless-ea527",
+    "storage_bucket": "limitless-ea527.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605324577339:android:0d19556612a166d5bcea1e",
+        "android_client_info": {
+          "package_name": "com.go.limitless.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8FP1LmYJ45YDUKvBA9uIGEX4UIPvGhzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
