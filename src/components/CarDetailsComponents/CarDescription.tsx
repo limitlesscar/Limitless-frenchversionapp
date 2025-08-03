@@ -26,9 +26,7 @@ const CarDescription = ({
     </View>
   );
 };
-
 export default CarDescription;
-
 /*
 import React from 'react';
 import {View} from 'react-native';
