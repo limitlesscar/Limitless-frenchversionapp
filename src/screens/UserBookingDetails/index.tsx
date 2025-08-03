@@ -70,7 +70,6 @@ const UserBookingDetails = () => {
       setReceiverId(data?.host?.host_user_id);
       setSenderId(String(userDetails?.id));
       setChatType('As Customer');
-
       navigate('SingleChat', {
         receiver_name: data?.host?.full_name,
       });

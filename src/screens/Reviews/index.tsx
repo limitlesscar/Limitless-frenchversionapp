@@ -34,8 +34,8 @@ const Reviews = () => {
     if (rating < 1) {
       Toast.show({
         type: 'error',
-        text1: 'Error',
-        text2: 'Star rating is required.',
+        text1: 'Erreur',
+        text2: 'Une note par étoiles est requise',
       });
       return;
     }
@@ -53,7 +53,7 @@ const Reviews = () => {
       <Pressable onPress={Keyboard.dismiss} style={styles.contentContainer}>
         <CustomText
           center
-          text={'Your booking has completed, Rate your experience'}
+          text={'Votre réservation est terminée, évaluez votre expérience'}
           color="#000"
           fontSize="S20"
           fontWeightPopins="900"
@@ -71,28 +71,29 @@ const Reviews = () => {
           control={control}
           numberOfLines={3}
           multiline
-          title="Tell us a bit more"
+          title="Dites-nous en un peu plus"
           name="review_message"
-          placeholder="Write Something"
+          placeholder="Écrivez quelque chose"
           rules={{
-            required: 'Review is required',
+            required: 'Un avis est requis',
             validate: {
               positive: (value: string) =>
-                value.trim().length > 0 || 'Review is required',
+                value.trim().length > 0 || 'Un avis est requis',
               minLength: (value: string) =>
                 value.trim().length >= 10 ||
-                'Review must be at least 10 characters',
+                'L’avis doit contenir au moins 10 caractères',
               maxLength: (value: string) =>
                 value.trim().length < 250 ||
-                'Review must not exceed 250 characters',
+                'L’avis ne doit pas dépasser 250 caractères',
             },
           }}
           style={styles.descriptionInput}
           textStyle={styles.descriptionInput}
         />
+
         <CustomButton
           loading={reviewLoading}
-          title="Submit"
+          title="Envoyer"
           onPress={handleSubmit(onSubmit)}
           containerStyle={{borderRadius: widthPercentageToDP(10)}}
         />

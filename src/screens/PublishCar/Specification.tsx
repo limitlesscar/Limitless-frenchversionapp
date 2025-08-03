@@ -174,7 +174,7 @@ const Specification: FC<PublishCarChildProps> = ({
     }
 
     if (!bookingTime?.end || !bookingTime?.start) {
-      Alert.alert('Error', 'Please select a time');
+      Alert.alert('Erreur', 'Veuillez sélectionner une heure');
       return;
     }
 
@@ -194,8 +194,8 @@ const Specification: FC<PublishCarChildProps> = ({
         startTime.getDate() !== new Date(bookingDates?.start).getDate()
       ) {
         Alert.alert(
-          'Error',
-          'End time must be at least 12 hours after the start time and cannot extend into the next day.',
+          'Erreur',
+          "L'heure de fin doit être au moins 12 heures après l'heure de début et ne peut pas dépasser la journée en cours.",
         );
         return;
       }

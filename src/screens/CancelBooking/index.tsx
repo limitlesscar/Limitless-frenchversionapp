@@ -33,7 +33,7 @@ const CancelBooking = () => {
     if (!cancelReason) {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: "Veuillez sélectionner une raison d'annulation.",
       });
       return;

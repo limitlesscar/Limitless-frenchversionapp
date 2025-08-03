@@ -113,8 +113,8 @@ const SelectDate: FC<PaymentScreenChildProps> = ({
     if (!date.start || !date.end || !time.start || !time.end) {
       Toast.show({
         type: 'error',
-        text1: 'Error',
-        text2: 'Please fill all the fields',
+        text1: 'Erreur',
+        text2: 'Veuillez remplir tous les champs',
       });
       return;
     }
@@ -142,7 +142,7 @@ const SelectDate: FC<PaymentScreenChildProps> = ({
         isClash = true;
         Toast.show({
           type: 'error',
-          text1: 'Error',
+          text1: 'Erreur',
           text2: `Car is already booked from ${dayjs(checkIsClashing.itemStart)
             .utc()
             .format('DD-MM-YYYY hh:mm A')} to ${dayjs(checkIsClashing.itemEnd)

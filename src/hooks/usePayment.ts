@@ -18,7 +18,7 @@ export const usePayment = params => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -32,7 +32,7 @@ export const usePayment = params => {
       console.log('setupIntentMutation', data.data);
       Toast.show({
         type: 'success',
-        text1: 'Success',
+         text1: 'Succès',
         text2: 'Card added successfully',
       });
     },
@@ -43,7 +43,7 @@ export const usePayment = params => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -58,7 +58,7 @@ export const usePayment = params => {
 
       Toast.show({
         type: 'success',
-        text1: 'Success',
+         text1: 'Succès',
         text2: 'Payment Successful',
       });
     },
@@ -69,7 +69,7 @@ export const usePayment = params => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -81,7 +81,7 @@ export const usePayment = params => {
 
       Toast.show({
         type: 'success',
-        text1: 'Success',
+         text1: 'Succès',
         text2: 'Successfully deleted the card',
       });
     },

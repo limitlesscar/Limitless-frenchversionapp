@@ -32,7 +32,7 @@ export {dayjs, formatDate, getMaxAgeDate, addUnitTime};
 
 /**
  * ----------------------------------------------
- * Contribution by erivan couttolenc – August 2025
+ * Contribution by Erivan couttolenc – August 2025
  * - Added `formatDatefrench` for French locale formatting.
  * - Ensured `dayjs` is extended with `utc`, `timezone`, and `customParseFormat`.
  * - Marked `customParseFormat` as required for calendar parsing (DO NOT REMOVE).

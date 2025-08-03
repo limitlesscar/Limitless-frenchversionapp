@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {StyleSheet, Switch, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 
 import {COLORS} from '../../../utils/theme';
@@ -20,7 +20,7 @@ const RecentCarsOnly: FC<RecentCarsOnlyProps> = ({active, setActive}) => {
             fontWeightPopins="600"
           />
           <CustomText
-          text="Moins de 5 ans"
+            text="Moins de 5 ans"
             //text="Less than 5 years old"
             color={COLORS.neutral400}
             fontWeightPopins="600"

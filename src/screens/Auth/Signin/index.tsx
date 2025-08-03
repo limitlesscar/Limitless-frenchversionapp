@@ -26,7 +26,7 @@ import {useRoute} from '@react-navigation/native';
 const SigninScreen = () => {
   const {control, handleSubmit, watch} = useForm();
   const {login, loginLoading} = useAuth();
-  const [isFocused, setIsFocused] = useState(false); // erivan : this is for the border when typing
+  const [isFocused, setIsFocused] = useState(false); // Erivan : this is for the border when typing
 
   const params = useRoute().params;
   const {user_type} = params || {};
@@ -44,7 +44,7 @@ const SigninScreen = () => {
     }
   };
   return (
-    // erivan couttolenc : translation of this page
+    // Erivan couttolenc : translation of this page
     <CustomWrapper padding backgroundColor={COLORS.white}>
       <AuthHeader
         heading="Bienvenue à Limitless"

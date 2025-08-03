@@ -10,7 +10,7 @@ const MyOrders = () => {
   const screens = {first: Ongoing, second: Upcoming, third: Completed};
   return (
     <CustomWrapper padding backgroundColor={COLORS.white}>
-      <CustomHeader  title="Mes commandes"/>
+      <CustomHeader title="Mes commandes" />
       <CustomTabs sceneMap={screens} />
     </CustomWrapper>
   );

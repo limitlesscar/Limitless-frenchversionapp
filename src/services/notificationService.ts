@@ -4,7 +4,6 @@ import {
   notificationsPerference,
   saveFCMTokenEndpoint,
 } from '../utils/endpoints';
-
 export const getNotificationService = async ({
   skip = 0,
   take = 100,

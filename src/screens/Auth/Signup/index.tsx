@@ -34,7 +34,7 @@ const SignupScreen = () => {
     if (data.phone_number?.length < 10) {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: 'Phone number is invalid.',
       });
       return;

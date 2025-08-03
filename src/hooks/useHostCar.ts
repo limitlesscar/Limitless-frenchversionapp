@@ -25,7 +25,7 @@ export const useHostCar = (params?: any) => {
         error?.response?.data?.message || error?.data?.message;
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -33,7 +33,7 @@ export const useHostCar = (params?: any) => {
       if (data?.data?.car?.id) {
         Toast.show({
           type: 'success',
-          text1: 'Success',
+           text1: 'Succès',
           text2: data?.data?.message || 'Car published successfully',
         });
         navigateReset('RootStack');
@@ -49,7 +49,7 @@ export const useHostCar = (params?: any) => {
       params?.successCallback(errorMessage);
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -66,7 +66,7 @@ export const useHostCar = (params?: any) => {
         error?.response?.data?.message || 'Error in publishing process';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -74,7 +74,7 @@ export const useHostCar = (params?: any) => {
       if (data?.data?.car?.id) {
         Toast.show({
           type: 'success',
-          text1: 'Success',
+           text1: 'Succès',
           text2: data?.data?.message || 'Car published successfully',
         });
         navigateGoBack();

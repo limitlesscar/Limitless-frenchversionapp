@@ -11,7 +11,7 @@ import {COLORS, IMAGES} from '../../../utils/theme';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {navigate} from '../../../utils/navigation';
-// erivan couttolenc : this page is where we have the login page when we click in the bottom nav the icon chat
+// Erivan couttolenc : this page is where we have the login page when we click in the bottom nav the icon chat
 const UserAuthScreen = () => {
   return (
     <CustomWrapper padding backgroundColor={COLORS.white}>
@@ -25,7 +25,7 @@ const UserAuthScreen = () => {
         />
         <CustomText
           text={'Bienvenue à Limitless'}
-          // erivan couttolenc :text={'Welcome to Limitless'}
+          // Erivan couttolenc :text={'Welcome to Limitless'}
           center
           fontWeightPopins="600"
           fontSize="S22"

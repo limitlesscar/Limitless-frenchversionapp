@@ -30,7 +30,7 @@ const GooglePlacesInput = ({
     setAddress?.('');
     inputRef.current?.setAddressText('');
   };
-  const [isFocused, setIsFocused] = useState(false); // erivan couttolenc : this is the border for the green state when typing
+  const [isFocused, setIsFocused] = useState(false); // Erivan couttolenc : this is the border for the green state when typing
 
   return (
     <GooglePlacesAutocomplete
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontSize: RFValue(12),
     color: '#000',
   },
-  // erivan couttolenc : this is the style for the border when serching
+  // Erivan couttolenc : this is the style for the border when serching
   textInputFocused: {
     borderColor: COLORS.newprimary, // ou une autre couleur de ton thème
     borderWidth: 1,

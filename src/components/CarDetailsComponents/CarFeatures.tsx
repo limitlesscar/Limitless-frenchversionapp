@@ -7,7 +7,7 @@ import RoundedBadge from '../RoundedBadge';
 import {CAR_FEATURES} from '../../utils/constants';
 
 const CarFeatures = ({data}: {data: string[]}) => {
-  // erivan : this is where we can get the list in french of the selected features
+  // Erivan Couttolenc : this is where we can get the list in french of the selected features
   const getFrenchLabel = (englishValue: string) => {
     const feature = CAR_FEATURES.find(item => item.value === englishValue);
     return feature ? feature.label_fr : englishValue; // fallback to English if not found

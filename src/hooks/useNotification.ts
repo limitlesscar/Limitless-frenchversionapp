@@ -33,7 +33,7 @@ export const useNotifications = (_?: any) => {
         'An unknown error occurred';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
 
@@ -50,7 +50,7 @@ export const useNotifications = (_?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: error?.message,
       });
     },

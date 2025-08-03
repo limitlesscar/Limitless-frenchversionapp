@@ -43,7 +43,7 @@ export const useAuth = (params?: any) => {
         'An unknown error occurred';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -82,7 +82,7 @@ export const useAuth = (params?: any) => {
         'An unknown error occurred';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -97,7 +97,7 @@ export const useAuth = (params?: any) => {
 
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }
@@ -112,7 +112,7 @@ export const useAuth = (params?: any) => {
         'An unknown error occurred';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -130,7 +130,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -143,7 +143,7 @@ export const useAuth = (params?: any) => {
         navigate('VerifyOtp', {email});
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }
@@ -157,7 +157,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -170,7 +170,7 @@ export const useAuth = (params?: any) => {
         navigate('VerifyOtp', {email});
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }
@@ -182,7 +182,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -195,7 +195,7 @@ export const useAuth = (params?: any) => {
         navigate('SetPassword', {email: data?.data?.user?.email, otp});
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }
@@ -207,7 +207,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -218,7 +218,7 @@ export const useAuth = (params?: any) => {
         navigateReplace('Signin');
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }
@@ -230,7 +230,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -245,7 +245,7 @@ export const useAuth = (params?: any) => {
         navigateGoBack();
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }
@@ -257,7 +257,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -268,7 +268,7 @@ export const useAuth = (params?: any) => {
         navigateGoBack();
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }
@@ -282,7 +282,7 @@ export const useAuth = (params?: any) => {
         error?.response?.data?.message || 'Error uploading images';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -295,7 +295,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -312,7 +312,7 @@ export const useAuth = (params?: any) => {
         // navigateGoBack();
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: 'Profile updated successfully',
         });
       }
@@ -326,7 +326,7 @@ export const useAuth = (params?: any) => {
       console.log({error});
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -347,7 +347,7 @@ export const useAuth = (params?: any) => {
         // navigateGoBack();
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: 'Profile updated successfully',
         });
       }
@@ -359,7 +359,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(
           (error?.response?.data as ErrorResponse)?.message,
         ),
@@ -381,7 +381,7 @@ export const useAuth = (params?: any) => {
         }
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: 'Succès',
           text2: data?.data?.message,
         });
       }

@@ -33,7 +33,7 @@ const Filters = ({
   const [showFilterOptions, setShowFilterOptions] = useState('');
   const BTSheetRef = useRef<BottomSheetModal>(null);
 
-  // erivan : this is the car filter nav where we can find the other filters for the search
+  // Erivan : this is the car filter nav where we can find the other filters for the search
   const CAR_SEARCH_FILTER_DATA = [
     {key: 'Vehicle Type', value: filters?.vehicle_type || 'Type de véhicule'},
     {key: 'Brands', value: 'Marques'},

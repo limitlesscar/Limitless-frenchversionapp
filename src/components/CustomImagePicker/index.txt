@@ -76,7 +76,7 @@ const CustomImagePickerSheet = (props: Props) => {
           closeBottomSheet();
           Toast.show({
             type: 'error',
-            text1: 'Error',
+            text1: 'Erreur',
             text2: 'Image should not exceed 1 MB',
           });
 
@@ -102,7 +102,7 @@ const CustomImagePickerSheet = (props: Props) => {
           closeBottomSheet();
           Toast.show({
             type: 'error',
-            text1: 'Error',
+            text1: 'Erreur',
             text2: 'Image should not exceed 1 MB',
           });
 

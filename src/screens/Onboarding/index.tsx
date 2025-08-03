@@ -6,7 +6,7 @@ import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {navigateReset} from '../../utils/navigation';
 import useUserStore from '../../service/store/user.store';
-// erivan : this is the onboarding screen where the program begin to work
+// Erivan Couttolenc : this is the onboarding screen where the program begin to work
 const Onboarding = () => {
   const {setOnboardingStatus} = useUserStore();
   const HandleNavigate = async () => {

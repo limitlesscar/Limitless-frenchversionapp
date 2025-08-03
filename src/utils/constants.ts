@@ -144,7 +144,7 @@ export const BOOKING_CANCELLATION_REASONS = [
 
 /**
  * ----------------------------------------------
- * Contribution by erivan couttolenc– August 2025
+ * Contribution by Erivan couttolenc– August 2025
  * - Added French labels (`label_fr`) for car features.
  * - Included French translations for vehicle types, booking reasons, and brands.
  * - Provided bilingual constants to support French localization.

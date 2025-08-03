@@ -39,7 +39,7 @@ export const useBooking = (params?: any) => {
         'An unknown error occurred';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -160,7 +160,7 @@ export const useBooking = (params?: any) => {
         'An unknown error occurred';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },
@@ -172,7 +172,7 @@ export const useBooking = (params?: any) => {
       // params?.handleSuccess?.(res);
       Toast.show({
         type: 'success',
-        text1: 'Success',
+         text1: 'Succès',
         text2: 'Review added successfully',
       });
       navigateReplace('RootStack');
@@ -184,7 +184,7 @@ export const useBooking = (params?: any) => {
         'An unknown error occurred';
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: 'Erreur',
         text2: errorFormatter(errorMessage),
       });
     },

@@ -20,7 +20,7 @@ import {Source} from 'react-native-fast-image';
 import Toast from 'react-native-toast-message';
 import useUserStore from '../../../service/store/user.store';
 import {useAuth} from '../../../hooks/useAuth';
-// erivan couttolenc :
+// Erivan couttolenc :
 import ErrorModal from './ErrorModal'; // le modal d’erreur qu’on a défini précédemment
 
 type ProfileDetailsProps = {

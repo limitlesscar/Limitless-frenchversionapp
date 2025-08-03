@@ -74,7 +74,7 @@ export const navigateReset = <T extends keyof RootStackNavigationType>(
 
 /**
  * ----------------------------------------------
- * Contribution by Erivan – August 2025
+ * Contribution by Erivan Couttolenc – August 2025
  * - Removed unused parameters from `navigate` function.
  * - Improved type safety and spread usage in all functions.
  * - Added fallback handling for optional params.
