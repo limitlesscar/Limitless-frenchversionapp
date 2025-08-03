@@ -130,7 +130,6 @@ export const getCeil30MinInterval = (now: Date) => {
   now.setMinutes(flooredMinutes, 0, 0);
   return now;
 };
-
 /*
   Explanation:
 

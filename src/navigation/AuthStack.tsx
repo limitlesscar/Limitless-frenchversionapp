@@ -92,3 +92,21 @@ const AuthStack = () => {
 };
 
 export default AuthStack;
+
+/*
+  Ce composant `AuthStack` gère la navigation principale liée à l'authentification et aux écrans utilisateur.
+  - Il utilise un `StackNavigator` pour enchaîner plusieurs écrans liés à l'authentification, la gestion de compte,
+    les commandes, les chats, les profils, etc.
+  - Le splash screen est caché dès que le chargement est terminé grâce au hook `useEffect`.
+  - La variable `isValidUser` vérifie si l'utilisateur est authentifié et validé (avec un token et un statut vérifié).
+    Si c'est le cas, on redirige directement vers le `RootStack` principal (navigation globale de l'app).
+  - Si l'utilisateur n'est pas validé, on affiche la pile d'authentification qui inclut :
+    - L'onboarding (affiché uniquement si l'utilisateur ne l'a pas encore vu),
+    - Les écrans de connexion, d'inscription, récupération de mot de passe, etc.
+    - Une multitude d'écrans fonctionnels liés au profil utilisateur, aux commandes, et à d'autres fonctionnalités.
+
+  - Tous les headers sont cachés (`headerShown: false`) pour laisser la liberté de gérer les en-têtes individuellement.
+
+  Ce pattern permet une gestion claire et modulaire de la navigation entre les états utilisateur non connecté,
+  en cours d'authentification, et connecté.
+*/

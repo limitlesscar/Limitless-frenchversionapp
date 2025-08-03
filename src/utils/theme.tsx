@@ -289,7 +289,6 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
   },
 });
-
 // Contribution by Erivan Couttolenc:
 // Updated the toast design and styling to improve UI/UX, including custom success and error toasts
 // with centered positioning, styled borders, shadow effects, and a "Fermer" (Close) button.

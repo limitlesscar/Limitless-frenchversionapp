@@ -52,7 +52,6 @@ export const useSocket = (props): any => {
     return () => setMessages([]);
   }, [getChatMessagesLoading, previousMessages, props?.isFocused]);
 
-
   useEffect(() => {
     const newSocket = socketIOClient(`${API_URL}chat`, {
       autoConnect: true,
@@ -136,3 +135,30 @@ export const useSocket = (props): any => {
     previousMessages,
   };
 };
+
+/*
+  Hook `useSocket` pour gérer une connexion Socket.IO dans une application React Native.
+
+  Fonctionnalités principales :
+  - Connexion et gestion du socket avec authentification via token Bearer.
+  - Gestion automatique de la connexion, reconnexion et nettoyage à la désactivation.
+  - Gestion des événements socket importants : 
+  /  * `joinRoom` pour rejoindre une room de chat spécifique,
+   / * `joinedRoom` pour récupérer et stocker l'ID de la room,
+   / * `newMessage` pour réceptionner en temps réel les nouveaux messages et les ajouter à l'état local.
+  - Utilisation de `GiftedChat` pour faciliter la gestion et l'affichage des messages.
+  - Synchronisation avec le store global via `useUserStore` et `useChatStore`.
+  - Envoi de messages via la fonction `onSend` qui émet un événement `sendMessage`.
+  - Mise à jour automatique des messages lors de la récupération initiale via API (hook `useChat`).
+  - Nettoyage des événements socket et déconnexion automatique à la destruction du composant.
+
+  Le hook expose :
+  - `socketConnected` : état de la connexion socket,
+  - `socketEmit` : fonction générique pour émettre des événements socket,
+  - `socket` : référence au socket (pour écoute ou émissions directes),
+  - `messages` : tableau des messages du chat,
+  - `onSend` : fonction pour envoyer un message,
+  - `getChatMessagesLoading` et `previousMessages` pour la gestion du chargement initial des messages via API.
+  
+  Ce hook centralise toute la logique socket en lien avec le chat, facilitant l'intégration en React Native.
+*/

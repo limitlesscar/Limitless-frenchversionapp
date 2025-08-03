@@ -204,3 +204,22 @@ export const useUserCar = (params?: any) => {
     getUserDetailQuery: getUserDetailQuery,
   };
 };
+
+/*
+  Hook `useUserCar` fournissant plusieurs requêtes pour gérer les données des voitures utilisateur,
+  basé sur la librairie React Query (@tanstack/react-query) avec support de pagination infinie.
+
+  Fonctionnalités principales :
+  - `getUserCarsQuery` : récupération paginée des voitures utilisateur avec filtres et recherche,
+    utilise `useInfiniteQuery` pour charger plus de pages à la demande.
+  - `getUserCarByIdQuery` : récupération des informations d'une voiture précise par son ID.
+  - `getUserDetailQuery` : récupération des détails utilisateur globaux.
+  - `getUserCarMapQuery` : récupération paginée des voitures affichées sur une carte.
+  - `getUserCarDetailsQuery` : récupération détaillée des informations d'une voiture (prix, type, marque, consommation, etc.)
+    avec transformation des données pour une présentation facile dans l'UI (tableau `about` avec icônes).
+
+  Le hook expose aussi les états de chargement (fetching, pending) pour chaque requête.
+
+  Ce hook centralise la logique de récupération et transformation des données relatives aux voitures,
+  et facilite la gestion côté interface grâce à React Query (caching, mise à jour automatique, pagination).
+*/

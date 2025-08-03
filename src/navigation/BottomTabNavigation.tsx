@@ -140,3 +140,19 @@ const styles = StyleSheet.create({
 });
 
 export default BottomTabNavigation;
+
+/*
+  Ce composant `BottomTabNavigation` crée une barre de navigation par onglets personnalisée
+  pour l'application, avec 5 onglets principaux : Home, Search, Hosting, Chat, et Setting.
+
+  - Chaque onglet est défini via un tableau `Tabbar` contenant son nom, son icône et le composant écran associé.
+  - Le bouton d'onglet est personnalisé avec `renderTabBarButton` :
+    - Affiche une icône avec un style qui change si l'onglet est sélectionné.
+    - Pour l'onglet "Chat", si l'utilisateur n'est pas connecté (`accessToken` absent),
+      la navigation redirige vers l'écran d'authentification `UserAuthScreen` au lieu d'ouvrir la liste de chats.
+  - La barre d'onglets est stylisée avec un fond blanc, coins arrondis, ombres et position flottante en bas de l'écran.
+  - Les labels des onglets sont masqués (`tabBarShowLabel: false`), seuls les icônes sont visibles.
+
+  Cette configuration offre une navigation fluide et sécurisée (authentification requise pour certains onglets),
+  avec un design moderne et responsive grâce aux utilitaires de taille et aux styles d'ombre.
+*/

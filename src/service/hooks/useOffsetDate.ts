@@ -35,7 +35,7 @@ const useOffsetDate = () => {
 export default useOffsetDate;
 
 
-//  Ce hook personnalisé utilise la bibliothèque `dayjs` avec plusieurs plugins pour gérer
+// erivan : Ce hook personnalisé utilise la bibliothèque `dayjs` avec plusieurs plugins pour gérer
 // les dates en tenant compte du fuseau horaire de l'utilisateur. La fonction `encodeTime` 
 // convertit une date donnée en une chaîne ISO 8601 formatée avec le décalage horaire local,
 // puis encode cette chaîne pour une utilisation dans une URL.

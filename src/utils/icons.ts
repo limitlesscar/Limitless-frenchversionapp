@@ -22,8 +22,6 @@ export default {
   Fontisto,
   MaterialIcons,
 };
-
-
 // Ce fichier regroupe et exporte sous forme d’objet tous les jeux d’icônes utilisés dans l'application,
 // provenant de `react-native-vector-icons`. Cela permet d'importer dynamiquement ou de centraliser
 // la gestion des icônes à partir d’un seul point.
