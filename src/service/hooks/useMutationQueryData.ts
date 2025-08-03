@@ -52,3 +52,11 @@ export const useMutationQueryData = <Payload, T>({
   });
   return {...mutationData};
 };
+
+//  Hook personnalisé pour effectuer des mutations HTTP (POST, PUT, DELETE, GET) via react-query.
+// Il gère les callbacks de succès, d’erreur, et une fonction facultative appelée avant la mutation.
+// En cas d’erreur 403 ou 410, il réinitialise les données utilisateur et le token d’accès.
+
+//  Custom hook to perform HTTP mutations (POST, PUT, DELETE, GET) using react-query.
+// It handles success and error callbacks, plus an optional function called before mutation.
+// On 403 or 410 errors, it resets user details and access token.

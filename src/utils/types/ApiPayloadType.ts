@@ -72,3 +72,17 @@ export type VerNursePayload = {
   timings: Timing[];
   stepNumber: number;
 };
+
+//  Ce fichier définit les types TypeScript utilisés pour les opérations d'authentification,
+// de gestion de profil (utilisateur, vétérinaire, hôpital), et les payloads d'API.
+// Ces types permettent d’assurer une validation stricte des données envoyées au backend,
+// d’améliorer l’autocomplétion et de réduire les erreurs dans les appels d’API.
+
+// This file defines TypeScript types used for authentication operations,
+// profile management (user, vet, hospital), and API request payloads.
+// These types help enforce strict validation of data sent to the backend,
+// improve autocomplete, and reduce errors in API calls.
+
+// Exemple d'utilisation / Example usage:
+// const payload: LoginPayloadType = { email: 'user@example.com', password: '123456' };
+// const onboarding: HospitalOnboardPayload = { personalDetails, timings, stepNumber: 2 };

@@ -55,3 +55,31 @@ export const HelpcenterEndpoint = 'terms-and-conditions';
 export const saveUserLocationEndpoint = 'user/location';
 export const userDetailEndPoint = 'user/me';
 export const stripeReCreateLinkEndPoint = 'stripe/account-link';
+
+// Ce fichier centralise tous les endpoints de l'API utilisés dans l'application.
+// Il facilite la maintenance, évite les erreurs de frappe, et permet un accès uniforme aux routes back-end.
+// Les endpoints sont classés par domaine fonctionnel :
+// - Authentification (`auth`, `user`, `otp`, etc.)
+// - Voitures (côté hôte et utilisateur)
+// - Réservations (`booking`)
+// - Paiements (`stripe`)
+// - Notifications et préférences
+// - Support / aide (`HelpcenterEndpoint`), etc.
+
+// Exemple d'utilisation :
+//   import {login} from './endpoints';
+//   axios.post(login, {email, password});
+
+//  This file centralizes all API endpoints used in the application.
+// It simplifies maintenance, avoids typos, and ensures consistent access to backend routes.
+// Endpoints are grouped by functionality:
+// - Authentication (`auth`, `user`, `otp`, etc.)
+// - Cars (host and user side)
+// - Bookings (`booking`)
+// - Payments (`stripe`)
+// - Notifications and preferences
+// - Support/help (`HelpcenterEndpoint`), etc.
+
+// Example usage:
+//   import {login} from './endpoints';
+//   axios.post(login, {email, password});

@@ -22,3 +22,17 @@ export default {
   Fontisto,
   MaterialIcons,
 };
+
+
+// Ce fichier regroupe et exporte sous forme d’objet tous les jeux d’icônes utilisés dans l'application,
+// provenant de `react-native-vector-icons`. Cela permet d'importer dynamiquement ou de centraliser
+// la gestion des icônes à partir d’un seul point.
+// Exemple d'utilisation :
+//   import Icons from './IconPack';
+//   const MyIcon = <Icons.Feather name="home" size={24} color="#000" />;
+
+//  This file imports and exports all icon sets used in the app from `react-native-vector-icons`
+// as a single object. It allows centralized and dynamic icon usage throughout the project.
+// Example usage:
+//   import Icons from './IconPack';
+//   const MyIcon = <Icons.Feather name="home" size={24} color="#000" />;

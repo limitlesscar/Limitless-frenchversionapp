@@ -70,3 +70,12 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
+/*
+Summary:
+- This axios instance automatically attaches the access token from the user store to every request.
+- When a 401 Unauthorized error occurs, it tries to refresh the access token using a stored refresh token.
+- If refresh is successful, it updates the token and optionally could retry the failed request.
+- If refresh fails or no refresh token exists, it clears user info and tokens to log the user out.
+- Navigation to login/reset stack is commented out but can be added where indicated.
+*/

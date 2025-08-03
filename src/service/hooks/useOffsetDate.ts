@@ -33,3 +33,14 @@ const useOffsetDate = () => {
 };
 
 export default useOffsetDate;
+
+
+//  Ce hook personnalisé utilise la bibliothèque `dayjs` avec plusieurs plugins pour gérer
+// les dates en tenant compte du fuseau horaire de l'utilisateur. La fonction `encodeTime` 
+// convertit une date donnée en une chaîne ISO 8601 formatée avec le décalage horaire local,
+// puis encode cette chaîne pour une utilisation dans une URL.
+
+//  This custom hook uses the `dayjs` library with multiple plugins to handle
+// dates considering the user's timezone. The `encodeTime` function converts a given date 
+// into an ISO 8601 string formatted with the local timezone offset, then URL-encodes this string
+// for safe use in URLs.

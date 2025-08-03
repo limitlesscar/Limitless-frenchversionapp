@@ -71,3 +71,13 @@ export async function upload({
     throw error;
   }
 }
+/*
+  Axios instance with:
+  - Base URL set from constants.
+  - Automatically attaches Bearer access token from Zustand user store to each request.
+  - On 401 Unauthorized responses:
+    • Attempts to refresh access token using stored refresh token.
+    • If refresh succeeds, updates stored access token.
+    • If refresh fails or no refresh token, clears user data and tokens (logs out user).
+  - Navigation calls to reset app state on logout are present but commented out.
+*/

@@ -293,3 +293,10 @@ export const globalStyles = StyleSheet.create({
 // Contribution by Erivan Couttolenc:
 // Updated the toast design and styling to improve UI/UX, including custom success and error toasts
 // with centered positioning, styled borders, shadow effects, and a "Fermer" (Close) button.
+// Ce fichier centralise :
+// - Les couleurs (`COLORS`), polices (`FONT`), ombres (`SHADOWS`) et images (`IMAGES`) globales de l'app.
+// - Une configuration personnalisée pour les toasts (`toastConfig`) avec styles adaptés à l'application,
+//   incluant une position centrée, des bordures colorées (succès/erreur), et un bouton "Fermer".
+// - Des styles globaux (`globalStyles`) pour les paddings et la mise en page générale.
+// Objectif : unifier la charte graphique et l'expérience utilisateur sur tous les écrans.
+// Contribution d’Erivan Couttolenc : amélioration des toasts pour une meilleure lisibilité et accessibilité visuelle.
