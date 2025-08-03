@@ -48,5 +48,16 @@ const App = () => {
     </>
   );
 };
-
 export default App;
+
+// Erivan :
+// Ce composant `App` est le point d’entrée principal de l’interface utilisateur de l’application :
+// - Configure la `StatusBar` pour une apparence transparente et un texte sombre.
+// - Affiche la pile de navigation `AuthStack` (connexion, onboarding ou écrans principaux).
+// - Active un écouteur de notifications avec `NotificationListener` (ex : FCM).
+// - Affiche les toasts personnalisés en haut de l’écran via `react-native-toast-message`.
+// - Utilise `useUserStore` pour vérifier et sauvegarder le token FCM de l’utilisateur (notifications push).
+// - Utilise `useNetInfo` pour détecter la connectivité réseau (composant `NetConnectionModal` désactivé ici).
+// Remarques :
+// - `Reviews` est commenté, utilisé probablement à des fins de test ou conditionnellement.
+// - `FastImage` et `SkeletonContent` sont importés mais non utilisés ici, peut-être prévus pour d'autres écrans.

@@ -1,14 +1,11 @@
 export const DEFAULT_IMAGE_URL =
   'https://w.wallhaven.cc/full/kx/wallhaven-kxorm6.jpg';
-
 // export const API_URL = 'http://192.168.1.164:8000/';
 // export const API_URL = 'https://api.limitless.zenkoders.com/';
 export const API_URL = 'http://localhost:8000/';
-
 export const API_REASONS = {
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
 };
-
 export const BRANDS = [
   {label: 'BMW', value: 'BMW'},
   {label: 'Audi', value: 'Audi'},
@@ -45,14 +42,12 @@ export const BRANDS = [
   {label: 'Volvo', value: 'Volvo'},
   {label: 'Subaru', value: 'Subaru'},
 ];
-
 export const ENGINE_TYPES = [
   {label: 'Essence', value: 'Gasoline'},
   {label: 'Diesel', value: 'Diesel'},
   {label: 'Électrique', value: 'Electric'},
   {label: 'Hybride', value: 'Hybrid'},
 ];
-
 export const TRANSMISSION_TYPES = [
   {label: 'Transmission manuelle', value: 'Manual Transmission'},
   {label: 'Transmission automatique', value: 'Automatic Transmission'},
@@ -62,7 +57,6 @@ export const TRANSMISSION_TYPES = [
     value: 'Continuously Variable Transmission',
   },
 ];
-
 export const GEAR_BOX = [
   {label: 'Boîte de vitesses manuelle', value: 'Manual Gearbox'},
   {label: 'Transmission automatique', value: 'Automatic Transmission'},
@@ -72,7 +66,6 @@ export const GEAR_BOX = [
     value: 'Continuously Variable Transmission',
   },
 ];
-
 export const CAR_FEATURES = [
   {label: 'CHILD_SEAT', value: 'Child Seat', label_fr: 'Siège enfant'},
   {label: 'GPS', value: 'GPS', label_fr: 'GPS'},
@@ -97,7 +90,6 @@ export const CAR_FEATURES = [
     label_fr: 'Transmission intégrale',
   },
 ];
-
 export const carColors = {
   '#000000': 'Black',
   '#ED2015': 'Red',
@@ -107,7 +99,6 @@ export const carColors = {
   '#BDBDBD': 'Grey',
   '#F5F5F5': 'White',
 };
-
 export const VEHICLE_TYPES = [
   {label: 'Tous', value: 'All'},
   {label: 'SUV', value: 'SUV'},
@@ -125,7 +116,6 @@ export const VEHICLE_TYPES = [
   {label: 'Véhicule électrique (VE)', value: 'Electric Vehicle (EV)'},
   {label: 'Véhicule hybride', value: 'Hybrid Vehicle'},
 ];
-
 export const BOOKING_CANCELLATION_REASONS = [
   {
     label: "Je n'ai pas besoin de ce trajet",
@@ -141,7 +131,6 @@ export const BOOKING_CANCELLATION_REASONS = [
   },
   {label: 'Autre', value: 'Other'},
 ];
-
 /**
  * ----------------------------------------------
  * Contribution by Erivan couttolenc– August 2025

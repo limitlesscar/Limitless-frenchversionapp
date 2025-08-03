@@ -65,3 +65,14 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent(appName, () => Root);
+
+/*Erivan couttolenc  French version */
+// Ce fichier initialise l'application React Native avec tous les fournisseurs nécessaires :
+// - `react-query` pour la gestion du cache et des requêtes réseau,
+// - `react-native-gesture-handler` pour les gestes,
+// - `react-native-safe-area-context` pour gérer les zones sûres,
+// - `@gorhom/bottom-sheet` pour les feuilles modales,
+// - `react-native-popup-menu` pour les menus contextuels,
+// - `react-navigation` pour la navigation avec prise en charge des liens profonds (`linking`),
+// - Configuration de la géolocalisation via `@react-native-community/geolocation`,
+// L'application principale est encapsulée dans tous ces fournisseurs et enregistrée via `AppRegistry`.
