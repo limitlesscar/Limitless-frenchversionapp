@@ -30,10 +30,3 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 ## Make sure to add env for autocomplete input
 
-.ENV
-# This is the .env file containing environment variables
-# necessary for the functioning of Google Maps API and Stripe API.
-# Google Maps API Key - used to access Google Maps services
-GOOGLE_MAPS_API_KEY=AIzaSyD2s3vyySyBlavEpYIa6cG8R0mpTBJM48Y
-# Stripe Publishable Key - used to interact with Stripe payment processing
-STRIPE_PUBLISHABLE_KEY=pk_test_51QZuAAISay562RG8p9pJKIkB84ciz0pJW1YqcNsWEHezpXvq05gjUymLgplIre9r8l9SHBCsfyUSwQ8QY5be1xuN00S4cXw1Zo
