@@ -30,7 +30,7 @@ export const useNotifications = (_?: any) => {
     onError: (error: ErrorResponse) => {
       const errorMessage =
         (error?.response?.data as ErrorResponse)?.message ||
-        'An unknown error occurred';
+        'Une erreur inconnue est survenue';
       Toast.show({
         type: 'error',
         text1: 'Erreur',

@@ -36,7 +36,7 @@ export const useBooking = (params?: any) => {
     onError: error => {
       const errorMessage =
         (error?.response?.data as ErrorResponse)?.message ||
-        'An unknown error occurred';
+        'Une erreur inconnue est survenue';
       Toast.show({
         type: 'error',
         text1: 'Erreur',
@@ -157,7 +157,7 @@ export const useBooking = (params?: any) => {
     onError: error => {
       const errorMessage =
         (error?.response?.data as ErrorResponse)?.message ||
-        'An unknown error occurred';
+        'Une erreur inconnue est survenue';
       Toast.show({
         type: 'error',
         text1: 'Erreur',
@@ -172,8 +172,8 @@ export const useBooking = (params?: any) => {
       // params?.handleSuccess?.(res);
       Toast.show({
         type: 'success',
-         text1: 'Succès',
-        text2: 'Review added successfully',
+        text1: 'Succès',
+        text2: 'Avis ajouté avec succès',
       });
       navigateReplace('RootStack');
       // navigateReset('RootStack');
@@ -181,7 +181,7 @@ export const useBooking = (params?: any) => {
     onError: error => {
       const errorMessage =
         (error?.response?.data as ErrorResponse)?.message ||
-        'An unknown error occurred';
+        'Une erreur inconnue est survenue';
       Toast.show({
         type: 'error',
         text1: 'Erreur',

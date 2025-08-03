@@ -33,8 +33,8 @@ export const useHostCar = (params?: any) => {
       if (data?.data?.car?.id) {
         Toast.show({
           type: 'success',
-           text1: 'Succès',
-          text2: data?.data?.message || 'Car published successfully',
+          text1: 'Succès',
+          text2: data?.data?.message || 'Voiture publiée avec succès',
         });
         navigateReset('RootStack');
       }
@@ -45,7 +45,8 @@ export const useHostCar = (params?: any) => {
     mutationFn: unpublishCarService,
     onError: (error: any) => {
       const errorMessage =
-        error?.response?.data?.message || 'Error in unpublishing process';
+        error?.response?.data?.message ||
+        'Erreur lors du processus de dépublication';
       params?.successCallback(errorMessage);
       Toast.show({
         type: 'error',
@@ -74,8 +75,8 @@ export const useHostCar = (params?: any) => {
       if (data?.data?.car?.id) {
         Toast.show({
           type: 'success',
-           text1: 'Succès',
-          text2: data?.data?.message || 'Car published successfully',
+          text1: 'Succès',
+          text2: data?.data?.message || 'Voiture mise à jour avec succès',
         });
         navigateGoBack();
       }

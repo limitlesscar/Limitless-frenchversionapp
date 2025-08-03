@@ -40,7 +40,7 @@ export const useAuth = (params?: any) => {
       console.log('error on login', error);
       const errorMessage =
         (error?.response?.data as ErrorResponse)?.message ||
-        'An unknown error occurred';
+        'Une erreur inconnue est survenue';
       Toast.show({
         type: 'error',
         text1: 'Erreur',
@@ -79,7 +79,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       const errorMessage =
         (error?.response?.data as ErrorResponse)?.message ||
-        'An unknown error occurred';
+        'Une erreur inconnue est survenue';
       Toast.show({
         type: 'error',
         text1: 'Erreur',
@@ -109,7 +109,7 @@ export const useAuth = (params?: any) => {
     onError: (error: ErrorResponse) => {
       const errorMessage =
         (error?.response?.data as ErrorResponse)?.message ||
-        'An unknown error occurred';
+        'Une erreur inconnue est survenue';
       Toast.show({
         type: 'error',
         text1: 'Erreur',
