@@ -10,7 +10,7 @@ import {CustomIcon} from '../CustomIcon';
 import CustomButton from '../CustomButton';
 import RangePicker from '../RangePicker';
 import TimePicker from '../TimePicker';
-import {formatDate} from '../../utils/dayjs';
+import {formatDate, formatDateFrench} from '../../utils/dayjs';
 import Row from '../Row';
 import LottieView from 'lottie-react-native';
 import calendarAnim from '../../assets/Lottie/calendar.json';
@@ -42,9 +42,7 @@ const CalendarTimePicker = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(date);
-
   const [showAnimation, setShowAnimation] = useState(true);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowAnimation(false);
@@ -83,10 +81,10 @@ const CalendarTimePicker = ({
         <CustomText
           text={
             date.end
-              ? `${formatDate(date?.start, 'DD MMM YY')},  ${
-                  time.start ? formatDate(time.start, 'hh:mm A') : ''
-                } - ${formatDate(date?.end, 'DD MMM YY')},  ${
-                  time?.end ? formatDate(time.end, 'hh:mm A') : ''
+              ? `${formatDateFrench(date?.start, 'DD MMM YY')},  ${
+                  time.start ? formatDateFrench(time.start, 'hh:mm A') : ''
+                } - ${formatDateFrench(date?.end, 'DD MMM YY')},  ${
+                  time?.end ? formatDateFrench(time.end, 'hh:mm A') : ''
                 } `
               : 'Date de prise en charge - Date de restitution'
           }

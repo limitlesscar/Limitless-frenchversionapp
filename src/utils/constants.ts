@@ -42,6 +42,8 @@ export const BRANDS = [
   {label: 'Volvo', value: 'Volvo'},
   {label: 'Subaru', value: 'Subaru'},
 ];
+// let's build a new array
+
 export const ENGINE_TYPES = [
   {label: 'Essence', value: 'Gasoline'},
   {label: 'Diesel', value: 'Diesel'},
@@ -115,7 +117,10 @@ export const VEHICLE_TYPES = [
   {label: 'Camion', value: 'Truck'},
   {label: 'Véhicule électrique (VE)', value: 'Electric Vehicle (EV)'},
   {label: 'Véhicule hybride', value: 'Hybrid Vehicle'},
+  {label: 'Camping-car', value: 'Camper Van'},
+  {label: 'Moto', value: 'Motorcycle'},
 ];
+
 export const BOOKING_CANCELLATION_REASONS = [
   {
     label: "Je n'ai pas besoin de ce trajet",

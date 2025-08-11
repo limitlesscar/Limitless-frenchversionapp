@@ -11,7 +11,7 @@ import {
 import {COLORS, FONT} from '../../../utils/theme';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {dayjs, formatDate} from '../../../utils/dayjs';
+import {dayjs, formatDate, formatDateFrench} from '../../../utils/dayjs';
 import {navigate} from '../../../utils/navigation';
 import SearchScreenSkeleton from '../../../components/Skeleton/SearchScreenSkeleton';
 
@@ -70,24 +70,27 @@ const SearchListItem: FC<SearchListItemProps> = ({
               />
             </View>
           </View>
+
           <View style={[styles.priceContainer, styles.dateContainer]}>
             <CustomText
-              text={`${dayjs(available_start_date_time).format(
+              text={`${formatDateFrench(
+                available_start_date_time,
                 'DD MMM',
-              )} - ${dayjs(available_end_date_time).format('DD MMM')}`}
+              )} - ${formatDateFrench(available_end_date_time, 'DD MMM')}`}
               textStyle={styles.date}
             />
             <CustomText text={name} textStyle={styles.date} />
           </View>
+
           <View style={styles.priceContainer}>
-              <CustomText
-                text={`${price_per_day}€ par jour`}
-                textStyle={styles.price}
-              />
-              <CustomText
-                text={`${price_per_hour}€ par heure`}
-                textStyle={styles.price}
-              />
+            <CustomText
+              text={`${price_per_day}€ par jour`}
+              textStyle={styles.price}
+            />
+            <CustomText
+              text={`${price_per_hour}€ par heure`}
+              textStyle={styles.price}
+            />
           </View>
         </View>
       </TouchableOpacity>

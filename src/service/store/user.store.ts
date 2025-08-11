@@ -14,6 +14,7 @@ const useUserStore = create(
       setUserDetails: userData => {
         set({
           isHost: userData?.user_type?.includes('host'),
+          isVerified: userData?.is_verified,
           userDetails: userData,
         });
       },

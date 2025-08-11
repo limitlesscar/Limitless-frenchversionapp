@@ -10,11 +10,18 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {COLORS, FONT} from '../../utils/theme';
 import HelpCenterContainerItem from './components/HelpCenterContainerItem';
 import {useHelpcenter} from '../../hooks/useHelpcenter';
-
 const HelpCenter = () => {
   const [search, setSearch] = useState('');
   const {getHelpcenterData, getHelpcenterDataLoading} = useHelpcenter({search});
   const data = getHelpcenterData?.data?.data?.sections;
+  // Erivan Couttolenc contribution - Create a map of translations
+  const titleMap = {
+    HOSTS: 'Locataires',
+    RENTERS: 'Loueurs de voitures',
+    INSURANCE: 'Assurance',
+    LEGAL: 'Légal',
+    'POLITIQUE DE CONFIDENTIALITES': 'Politique de Confidentialité',
+  };
   return (
     <CustomWrapper padding backgroundColor={COLORS.white}>
       <CustomHeader title="Centre d'aide" />
@@ -35,11 +42,14 @@ const HelpCenter = () => {
               />
             </View>
           )}
-          renderSectionHeader={({section}) => (
-            <View style={styles.sectionHeader}>
-              <CustomText text={section.title} textStyle={styles.headerText} />
-            </View>
-          )}
+          renderSectionHeader={({section}) => {
+            const displayTitle = titleMap[section.title] || section.title;
+            return (
+              <View style={styles.sectionHeader}>
+                <CustomText text={displayTitle} textStyle={styles.headerText} />
+              </View>
+            );
+          }}
           contentContainerStyle={styles.listContainer}
         />
       )}

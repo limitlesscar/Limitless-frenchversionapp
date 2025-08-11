@@ -14,7 +14,7 @@ import SummaryItemRow from './components/SummaryItemRow';
 import usePublishCarStore from '../../service/store/publishCar.store';
 import {PublishCarChildProps} from './interface';
 import {useHostCar} from '../../hooks/useHostCar';
-import {formatDate} from '../../utils/dayjs';
+import {formatDateFrench} from '../../utils/dayjs';
 import useOffsetDate from '../../service/hooks/useOffsetDate';
 import {
   CAR_FEATURES,
@@ -175,14 +175,18 @@ const SummaryReview: FC<PublishCarChildProps | any> = ({data}) => {
           />
           <SummaryItemRow
             title="Dates de réservation"
-            value={`${formatDate(
+            value={`${formatDateFrench(
               available_start_date,
               'DD MMM YYYY',
-            )} ${formatDate(available_start_time, 'hh:mm A')}  - ${formatDate(
+            )} ${formatDateFrench(
+              available_start_time,
+              'hh:mm A',
+            )}  - ${formatDateFrench(
               available_end_date,
               'DD MMM YYYY',
-            )} ${formatDate(available_end_time, 'hh:mm A')}`}
+            )} ${formatDateFrench(available_end_time, 'hh:mm A')}`}
           />
+
           <SummaryItemRow title="Lieu de dépôt" value={dropoff_address || ''} />
           <SummaryItemRow
             title="Lieu de prise en charge"

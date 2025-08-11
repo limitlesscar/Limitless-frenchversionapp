@@ -34,7 +34,7 @@ import {CarReviewType} from '../../components/CarDetailsComponents/interface';
 import useUserStore from '../../service/store/user.store';
 import useChatStore from '../../service/store/chat.store';
 import {useBooking} from '../../hooks/useBooking';
-import {dayjs, formatDate, formatDatefrench} from '../../utils/dayjs';
+import {dayjs, formatDate, formatDateFrench} from '../../utils/dayjs';
 import {MenuType} from '../../utils/types/globalType';
 
 const UserBookingDetails = () => {
@@ -119,7 +119,7 @@ const UserBookingDetails = () => {
               center
             />
             <CustomText
-              text={`${formatDatefrench(bookingStartDate)} - ${formatDatefrench(
+              text={`${formatDateFrench(bookingStartDate)} - ${formatDateFrench(
                 bookingEndDate,
               )}`}
               fontSize="S12"

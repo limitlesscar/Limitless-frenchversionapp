@@ -2,13 +2,10 @@ import React, {FC} from 'react';
 import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
-
 import {CustomImage, CustomText} from '../../../../components';
 import {PopularVehiclesCardProps} from './interface';
 import {COLORS, FONT, IMAGES} from '../../../../utils/theme';
 import {navigate} from '../../../../utils/navigation';
-import SkeletonLoading from 'react-native-skeleton-loading';
-import HomeScreenSkeleton from '../../../../components/Skeleton/HomeScreenSkeleton';
 const PopularVehiclesCard: FC<PopularVehiclesCardProps> = ({
   id,
   name,
@@ -16,10 +13,25 @@ const PopularVehiclesCard: FC<PopularVehiclesCardProps> = ({
   transmission_type,
   price_per_day = 0,
   price_per_hour = 0,
-  getUserCarsLoading,
   // getUserCarsLoading ?
 }) => {
   // console.log({getUserCarsLoading});
+
+  const translateTransmissionType = (type: any): any => {
+    switch (type) {
+      case 'Manual Transmission':
+        return 'Transmission manuelle';
+      case 'Automatic Transmission':
+        return 'Transmission automatique';
+      case 'Dual-Clutch Transmission':
+        return 'Transmission à double embrayage';
+      case 'Continuously Variable Transmission':
+        return 'Transmission à variation continue';
+      default:
+        return type;
+    }
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -43,7 +55,7 @@ const PopularVehiclesCard: FC<PopularVehiclesCardProps> = ({
           />
           <CustomText
             numberOfLines={1}
-            text={transmission_type}
+            text={translateTransmissionType(transmission_type)}
             color={COLORS.neutral400}
             fontWeightInter="500"
             fontSize="S8"

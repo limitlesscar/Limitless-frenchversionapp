@@ -17,6 +17,7 @@ export const cancelBookingService = async (payload: any) => {
     },
   );
 };
+
 export const giveReviewsService = async (payload: any) => {
   return await axiosInstance.post(`${userBookingReviewEndpoint}`, payload);
 };

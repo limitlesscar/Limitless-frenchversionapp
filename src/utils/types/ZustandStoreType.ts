@@ -9,6 +9,7 @@ export interface UserStoreType {
   userDetails: UserDetailsType | null;
   accessToken: string;
   isFcmToken: boolean;
+  isVerified?: boolean;
   isHost?: boolean;
   setUserDetails: (value: UserDetailsType) => void;
   setAccessToken: (value: string) => void;

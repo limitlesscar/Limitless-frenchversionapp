@@ -1,7 +1,6 @@
 import {MMKV} from 'react-native-mmkv';
 
 const storage = new MMKV();
-
 const MMKVStorage = {
   getItem: (key: string): Promise<string | null> => {
     const value = storage.getString(key);

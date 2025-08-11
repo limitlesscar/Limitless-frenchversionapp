@@ -9,7 +9,7 @@ import {CustomText} from '../CustomText';
 import Row from '../Row';
 import {CarReviewType} from './interface';
 import {formatStars, getInitials} from '../../utils/helper';
-import {formatDate} from '../../utils/dayjs';
+import {formatDate, formatDateFrench} from '../../utils/dayjs';
 
 interface CarReviewsProps {
   reviews: CarReviewType[];
@@ -45,7 +45,7 @@ const renderItem = ({item}: any) => {
           fontWeightPopins="500"
         />
         <CustomText
-          text={formatDate(item?.createdAt)}
+          text={formatDateFrench(item?.createdAt)}
           color={COLORS.neutral500}
           fontSize="S12"
         />

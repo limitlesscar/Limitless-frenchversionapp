@@ -51,6 +51,13 @@ const ConfirmPayment: FC<PaymentScreenChildProps> = ({
   const {paymentIntent, paymentIntentLoading} = usePayment({
     successHandler,
   });
+
+  const formatDateFrench = dateString => {
+    if (!dateString) return '';
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.child}>
@@ -73,14 +80,14 @@ const ConfirmPayment: FC<PaymentScreenChildProps> = ({
           <View style={styles.row}>
             <CustomTextInput
               title="Date de début"
-              value={start_date}
+              value={formatDateFrench(start_date)} // affiche 15/08/2025
               inputContainerStyle={{minWidth: widthPercentageToDP(40)}}
               disabled
               editable={false}
             />
             <CustomTextInput
               title="Date de fin"
-              value={end_date}
+              value={formatDateFrench(end_date)} // affiche 20/08/2025
               inputContainerStyle={{minWidth: widthPercentageToDP(40)}}
               disabled
               editable={false}
