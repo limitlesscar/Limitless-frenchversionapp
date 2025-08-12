@@ -1,6 +1,4 @@
 {
-  // The internal name of the app, used by package managers and the system
   "name": "limitless_mobile_app",
-  // The display name of the app, shown on the device home screen and app listings
   "displayName": "limitless_mobile_app"
 }

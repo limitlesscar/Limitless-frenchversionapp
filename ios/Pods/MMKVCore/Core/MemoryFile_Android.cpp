@@ -70,33 +70,28 @@ File::File(MMKVFileHandle_t ashmemFD)
     }
 }
 
-MemoryFile::MemoryFile(string path, size_t size, FileType fileType, size_t expectedCapacity, bool isReadOnly)
+MemoryFile::MemoryFile(string path, size_t size, FileType fileType, size_t expectedCapacity, bool isReadOnly, bool mayflyFD)
     : m_diskFile(std::move(path), isReadOnly ? OpenFlag::ReadOnly : (OpenFlag::ReadWrite | OpenFlag::Create), size, fileType),
-    m_ptr(nullptr), m_size(0), m_fileType(fileType), m_readOnly(isReadOnly) {
+    m_ptr(nullptr), m_size(0), m_fileType(fileType), m_readOnly(isReadOnly), m_isMayflyFD(mayflyFD) {
     if (m_fileType == MMFILE_TYPE_FILE) {
         reloadFromFile(expectedCapacity);
     } else {
         if (m_diskFile.isFileValid()) {
             m_size = m_diskFile.m_size;
-            auto ret = mmap();
-            if (!ret) {
-                doCleanMemoryCache(true);
-            }
+            mmapOrCleanup(nullptr);
         }
     }
 }
 
 MemoryFile::MemoryFile(int ashmemFD)
-    : m_diskFile(ashmemFD), m_ptr(nullptr), m_size(0), m_fileType(MMFILE_TYPE_ASHMEM), m_readOnly(false) {
+    : m_diskFile(ashmemFD), m_ptr(nullptr), m_size(0), m_fileType(MMFILE_TYPE_ASHMEM), m_readOnly(false),
+    m_isMayflyFD(false) {
     if (!m_diskFile.isFileValid()) {
         MMKVError("fd %d invalid", ashmemFD);
     } else {
         m_size = m_diskFile.m_size;
         MMKVInfo("ashmem name:%s, size:%zu", m_diskFile.m_path.c_str(), m_size);
-        auto ret = mmap();
-        if (!ret) {
-            doCleanMemoryCache(true);
-        }
+        mmapOrCleanup(nullptr);
     }
 }
 
@@ -231,6 +226,22 @@ string ASharedMemory_getName(int fd) {
 
 MMKVPath_t ashmemMMKVPathWithID(const MMKVPath_t &mmapID) {
     return MMKVPath_t(ASHMEM_NAME_DEF) + MMKV_PATH_SLASH + mmapID;
+}
+
+static long long timespec_to_ms(struct timespec ts) {
+    return (long long)ts.tv_sec * 1000LL + ts.tv_nsec / 1000000LL;
+}
+
+long long getFileModifyTimeInMS(const char *path) {
+    if (!path) {
+        return -1;
+    }
+    struct stat soStat = {};
+    if (::stat(path, &soStat) < 0) {
+        MMKVError("fail to stat %s: %d(%s)", path, errno, strerror(errno));
+        return -1;
+    }
+    return timespec_to_ms(soStat.st_mtim);
 }
 
 #endif // MMKV_ANDROID

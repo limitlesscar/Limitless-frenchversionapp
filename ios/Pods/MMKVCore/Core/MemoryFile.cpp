@@ -36,12 +36,14 @@
 #    include <dirent.h>
 #    include <cstring>
 #    include <unistd.h>
+#    include <filesystem>
 
 using namespace std;
+namespace fs = std::filesystem;
 
 namespace mmkv {
 
-extern bool getFileSize(int fd, size_t &size);
+static bool getFileSize(const char *path, size_t &size);
 
 #    ifdef MMKV_ANDROID
 extern size_t ASharedMemory_getSize(int fd);
@@ -50,9 +52,9 @@ File::File(MMKVPath_t path, OpenFlag flag) : m_path(std::move(path)), m_fd(-1), 
     open();
 }
 
-MemoryFile::MemoryFile(MMKVPath_t path, size_t expectedCapacity, bool readOnly)
+MemoryFile::MemoryFile(MMKVPath_t path, size_t expectedCapacity, bool readOnly, bool mayflyFD)
     : m_diskFile(std::move(path), readOnly ? OpenFlag::ReadOnly : (OpenFlag::ReadWrite | OpenFlag::Create))
-    , m_ptr(nullptr), m_size(0), m_readOnly(readOnly)
+    , m_ptr(nullptr), m_size(0), m_readOnly(readOnly), m_isMayflyFD(mayflyFD)
 {
     reloadFromFile(expectedCapacity);
 }
@@ -95,16 +97,16 @@ bool File::open() {
     }
     m_fd = ::open(m_path.c_str(), OpenFlag2NativeFlag(m_flag), S_IRWXU);
     if (!isFileValid()) {
-        MMKVError("fail to open [%s], flag %x, %d(%s)", m_path.c_str(), m_flag, errno, strerror(errno));
+        MMKVError("fail to open [%s], flag 0x%x, %d(%s)", m_path.c_str(), m_flag, errno, strerror(errno));
         return false;
     }
-    MMKVInfo("open fd[%p], flag %x, %s", m_fd, m_flag, m_path.c_str());
+    MMKVInfo("open fd[%d], flag 0x%x, %s", m_fd, m_flag, m_path.c_str());
     return true;
 }
 
 void File::close() {
     if (isFileValid()) {
-        MMKVInfo("closing fd[%p], %s", m_fd, m_path.c_str());
+        MMKVInfo("closing fd[%d], %s", m_fd, m_path.c_str());
         if (::close(m_fd) == 0) {
             m_fd = -1;
         } else {
@@ -120,11 +122,46 @@ size_t File::getActualFileSize() const {
     }
 #    endif
     size_t size = 0;
-    mmkv::getFileSize(m_fd, size);
+    if (isFileValid()) {
+        mmkv::getFileSize(m_fd, size);
+    } else {
+        mmkv::getFileSize(m_path.c_str(), size);
+    }
     return size;
 }
 
-bool MemoryFile::truncate(size_t size) {
+bool MemoryFile::openIfNeeded() {
+    if (!m_diskFile.isFileValid()) {
+        return m_diskFile.open();
+    }
+    return true;
+}
+
+void MemoryFile::cleanMayflyFD() {
+    if (m_isMayflyFD && m_diskFile.isFileValid()) {
+        m_diskFile.close();
+    }
+}
+
+size_t MemoryFile::getActualFileSize() {
+    if (!m_isMayflyFD && !m_diskFile.isFileValid()) {
+        return 0;
+    }
+
+    return m_diskFile.getActualFileSize();
+}
+
+MMKVFileHandle_t MemoryFile::getFd() {
+    if (m_isMayflyFD) {
+        openIfNeeded();
+    }
+    return m_diskFile.getFd();
+}
+
+bool MemoryFile::truncate(size_t size, FileLock *fileLock) {
+    if (m_isMayflyFD) {
+        openIfNeeded();
+    }
     if (!m_diskFile.isFileValid()) {
         return false;
     }
@@ -181,11 +218,7 @@ bool MemoryFile::truncate(size_t size) {
             MMKVError("fail to munmap [%s], %s", m_diskFile.m_path.c_str(), strerror(errno));
         }
     }
-    auto ret = mmap();
-    if (!ret) {
-        doCleanMemoryCache(true);
-    }
-    return ret;
+    return mmapOrCleanup(fileLock);
 }
 
 bool MemoryFile::msync(SyncFlag syncFlag) {
@@ -203,16 +236,24 @@ bool MemoryFile::msync(SyncFlag syncFlag) {
     return false;
 }
 
-bool MemoryFile::mmap() {
+bool MemoryFile::mmapOrCleanup(FileLock *fileLock) {
     auto oldPtr = m_ptr;
     auto mode = m_readOnly ? PROT_READ : (PROT_READ | PROT_WRITE);
     m_ptr = (char *) ::mmap(m_ptr, m_size, mode, MAP_SHARED, m_diskFile.m_fd, 0);
     if (m_ptr == MAP_FAILED) {
-        MMKVError("fail to mmap [%s], mode %x, %s", m_diskFile.m_path.c_str(), mode, strerror(errno));
+        MMKVError("fail to mmap [%s], mode 0x%x, %s", m_diskFile.m_path.c_str(), mode, strerror(errno));
         m_ptr = nullptr;
+
+        doCleanMemoryCache(true);
         return false;
     }
     MMKVInfo("mmap to address [%p], oldPtr [%p], [%s]", m_ptr, oldPtr, m_diskFile.m_path.c_str());
+
+    if (m_isMayflyFD && fileLock) {
+        fileLock->destroyAndUnLock();
+    }
+
+    cleanMayflyFD();
     return true;
 }
 
@@ -228,9 +269,7 @@ void MemoryFile::reloadFromFile(size_t expectedCapacity) {
         doCleanMemoryCache(false);
     }
 
-    if (!m_diskFile.open()) {
-        MMKVError("fail to open:%s, %s", m_diskFile.m_path.c_str(), strerror(errno));
-    } else {
+    if (openIfNeeded()) {
         FileLock fileLock(m_diskFile.m_fd);
         InterProcessLock lock(&fileLock, SharedLockType);
         SCOPED_LOCK(&lock);
@@ -244,12 +283,9 @@ void MemoryFile::reloadFromFile(size_t expectedCapacity) {
 
             size_t roundSize = ((m_size / DEFAULT_MMAP_SIZE) + 1) * DEFAULT_MMAP_SIZE;;
             roundSize = std::max<size_t>(expectedSize, roundSize);
-            truncate(roundSize);
+            truncate(roundSize, &fileLock);
         } else {
-            auto ret = mmap();
-            if (!ret) {
-                doCleanMemoryCache(true);
-            }
+            mmapOrCleanup(&fileLock);
         }
 #    ifdef MMKV_IOS
         if (!m_readOnly) {
@@ -388,6 +424,7 @@ bool zeroFillFile(int fd, size_t startPos, size_t size) {
 }
 
 #ifndef MMKV_APPLE
+
 bool getFileSize(int fd, size_t &size) {
     struct stat st = {};
     if (fstat(fd, &st) != -1) {
@@ -396,7 +433,18 @@ bool getFileSize(int fd, size_t &size) {
     }
     return false;
 }
-#else
+
+bool getFileSize(const char *path, size_t &size) {
+    struct stat st = {};
+    if (stat(path, &st) != -1) {
+        size = (size_t) st.st_size;
+        return true;
+    }
+    return false;
+}
+
+#else // !MMKV_APPLE
+
 // avoid using so-called privacy API
 bool getFileSize(int fd, size_t &size) {
     auto cur = lseek(fd, 0, SEEK_CUR);
@@ -412,10 +460,28 @@ bool getFileSize(int fd, size_t &size) {
     lseek(fd, cur, SEEK_SET);
     return true;
 }
-#endif
+
+bool getFileSize(const char *path, size_t &size) {
+    auto fd = open(path, O_RDONLY);
+    if (fd >= 0) {
+        auto ret = getFileSize(fd, size);
+        close(fd);
+        return ret;
+    }
+    return false;
+}
+
+#endif // !MMKV_APPLE
 
 size_t getPageSize() {
     return static_cast<size_t>(getpagesize());
+}
+
+extern MMKVPath_t absolutePath(const MMKVPath_t &path) {
+    fs::path relative_path(path);
+    fs::path absolute_path = fs::absolute(relative_path);
+    fs::path normalized = fs::weakly_canonical(absolute_path);
+    return normalized.string();
 }
 
 #ifndef MMKV_APPLE
@@ -604,6 +670,42 @@ void walkInDir(const MMKVPath_t &dirPath, WalkType type, const function<void(con
 
     closedir(dir);
 }
+
+bool deleteFile(const MMKVPath_t &path) {
+    auto filename = path.c_str();
+    if (::unlink(filename) != 0) {
+        auto err = errno;
+        MMKVError("fail to delete file [%s], %d (%s)", filename, err, strerror(err));
+        return false;
+    }
+    return true;
+}
+
+#ifndef MMKV_APPLE
+bool isDiskOfMMAPFileCorrupted(MemoryFile *file, bool &needReportReadFail) {
+    // TODO: maybe we need reading a larger chunk than 4 byte in Android/Linux
+    uint32_t info;
+    auto fd = file->getFd();
+    auto path = file->getPath().c_str();
+
+    auto oldPos = lseek(fd, 0, SEEK_CUR);
+    lseek(fd, 0, SEEK_SET);
+    auto size = read(fd, &info, sizeof(info));
+    auto err = errno;
+    lseek(fd, oldPos, SEEK_SET);
+
+    if (size <= 0) {
+        needReportReadFail = true;
+        MMKVError("fail to read [%s] from fd [%d], errno: %d (%s)", path, fd, err, strerror(err));
+        if (err == EIO || err == EILSEQ || err == EINVAL || err == ENXIO) {
+            MMKVWarning("file fail to read, consider it illegal, delete now: [%s]", path);
+            return true;
+        }
+    }
+    file->cleanMayflyFD();
+    return false;
+}
+#endif
 
 } // namespace mmkv
 

@@ -2,7 +2,7 @@ export const DEFAULT_IMAGE_URL =
   'https://w.wallhaven.cc/full/kx/wallhaven-kxorm6.jpg';
 // export const API_URL = 'http://192.168.1.164:8000/';
 // export const API_URL = 'https://api.limitless.zenkoders.com/';
-export const API_URL = 'http://localhost:8000/';
+export const API_URL = 'https://staging-api-limitless.zenkoders.com/';
 export const API_REASONS = {
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
 };

@@ -1,5 +1,6 @@
 module.exports = function (api) {
   api.cache(false);
+
   return {
     presets: ['module:metro-react-native-babel-preset'],
     plugins: [
@@ -48,12 +49,3 @@ module.exports = function (api) {
     ],
   };
 };
-
-/*Erivan couttolenc : */
-// Ce fichier configure Babel pour l'application React Native.
-// - Utilise le preset standard `metro-react-native-babel-preset`.
-// - Ajoute un plugin `module-resolver` pour permettre des alias personnalisés (ex : `src`, `components`, etc.).
-// - Intègre le plugin `react-native-reanimated`, requis pour le bon fonctionnement de Reanimated.
-// - Utilise `react-native-dotenv` pour charger les variables d’environnement depuis un fichier `.env`.
-// - Applique une règle spéciale (`overrides`) pour éviter les conflits avec `react-native-maps` en activant
-//   `@babel/plugin-transform-private-methods` (en mode loose) uniquement hors de ce module.

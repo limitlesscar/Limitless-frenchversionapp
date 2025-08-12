@@ -1,6 +1,6 @@
 {
   "name": "react-native-keyboard-controller",
-  "version": "1.18.2",
+  "version": "1.18.4",
   "summary": "Keyboard manager which works in identical way on both iOS and Android",
   "homepage": "https://kirillzyusko.github.io/react-native-keyboard-controller/",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/kirillzyusko/react-native-keyboard-controller.git",
-    "tag": "1.18.2"
+    "tag": "1.18.4"
   },
   "source_files": "ios/**/*.{h,m,mm,swift}",
   "exclude_files": "ios/KeyboardControllerNative/**/*",

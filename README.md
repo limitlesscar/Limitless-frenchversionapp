@@ -29,4 +29,3 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
   - User can be host and host can be user, so showing edit options (for car details) for only host user id and related handling will create more complexity in furture so to keep things simple separate components are created.
 
 ## Make sure to add env for autocomplete input
-

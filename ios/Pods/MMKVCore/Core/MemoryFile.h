@@ -29,6 +29,8 @@
 #ifdef MMKV_ANDROID
 MMKVPath_t ashmemMMKVPathWithID(const MMKVPath_t &mmapID);
 
+long long getFileModifyTimeInMS(const char *path);
+
 namespace mmkv {
 extern int g_android_api;
 extern std::string g_android_tmpDir;
@@ -66,6 +68,8 @@ T roundUp(T numToRound, T multiple) {
     return ((numToRound + multiple - 1) / multiple) * multiple;
 }
 
+class FileLock;
+
 class File {
     MMKVPath_t m_path;
     MMKVFileHandle_t m_fd;
@@ -94,7 +98,7 @@ public:
 #ifndef MMKV_WIN32
     bool isFileValid() const { return m_fd >= 0; }
 #else
-    bool isFileValid() const { return m_fd != INVALID_HANDLE_VALUE; }
+    bool isFileValid() const { return m_fd != MMKVFileHandleInvalidValue; }
 #endif
 
     // get the actual file size on disk
@@ -115,16 +119,19 @@ class MemoryFile {
     void *m_ptr;
     size_t m_size;
     const bool m_readOnly;
+    const bool m_isMayflyFD;
 
-    bool mmap();
+    bool mmapOrCleanup(FileLock *fileLock);
 
     void doCleanMemoryCache(bool forceClean);
 
+    bool openIfNeeded();
+
 public:
 #ifndef MMKV_ANDROID
-    explicit MemoryFile(MMKVPath_t path, size_t expectedCapacity = 0, bool readOnly = false);
+    explicit MemoryFile(MMKVPath_t path, size_t expectedCapacity = 0, bool readOnly = false, bool mayflyFD = false);
 #else
-    MemoryFile(MMKVPath_t path, size_t size, FileType fileType, size_t expectedCapacity = 0, bool readOnly = false);
+    MemoryFile(MMKVPath_t path, size_t size, FileType fileType, size_t expectedCapacity = 0, bool readOnly = false, bool mayflyFD = false);
     explicit MemoryFile(MMKVFileHandle_t ashmemFD);
 
     const FileType m_fileType;
@@ -135,16 +142,18 @@ public:
     size_t getFileSize() const { return m_size; }
 
     // get the actual file size on disk
-    size_t getActualFileSize() const { return m_diskFile.getActualFileSize(); }
+    size_t getActualFileSize();
 
     void *getMemory() { return m_ptr; }
 
     const MMKVPath_t &getPath() { return m_diskFile.getPath(); }
 
-    MMKVFileHandle_t getFd() { return m_diskFile.getFd(); }
+    MMKVFileHandle_t getFd();
+
+    void cleanMayflyFD();
 
     // the newly expanded file content will be zeroed
-    bool truncate(size_t size);
+    bool truncate(size_t size, FileLock *fileLock = nullptr);
 
     bool msync(SyncFlag syncFlag);
 
@@ -154,9 +163,9 @@ public:
     void clearMemoryCache() { doCleanMemoryCache(false); }
 
 #ifndef MMKV_WIN32
-    bool isFileValid() { return m_diskFile.isFileValid() && m_size > 0 && m_ptr; }
+    bool isFileValid() { return (m_isMayflyFD || m_diskFile.isFileValid()) && m_size > 0 && m_ptr; }
 #else
-    bool isFileValid() { return m_diskFile.isFileValid() && m_size > 0 && m_fileMapping && m_ptr; }
+    bool isFileValid() { return (m_isMayflyFD || (m_diskFile.isFileValid() && m_fileMapping)) && m_size > 0 && m_ptr; }
 #endif
 
     // just forbid it for possibly misuse
@@ -171,7 +180,10 @@ extern bool isFileExist(const MMKVPath_t &nsFilePath);
 extern MMBuffer *readWholeFile(const MMKVPath_t &path);
 extern bool zeroFillFile(MMKVFileHandle_t fd, size_t startPos, size_t size);
 extern size_t getPageSize();
-
+extern MMKVPath_t absolutePath(const MMKVPath_t &path);
+#ifndef MMKV_WIN32
+extern bool getFileSize(int fd, size_t &size);
+#endif
 extern bool tryAtomicRename(const MMKVPath_t &srcPath, const MMKVPath_t &dstPath);
 
 // copy file by potentially renaming target file, might change file inode
@@ -181,6 +193,12 @@ extern bool copyFile(const MMKVPath_t &srcPath, const MMKVPath_t &dstPath);
 extern bool copyFileContent(const MMKVPath_t &srcPath, const MMKVPath_t &dstPath);
 extern bool copyFileContent(const MMKVPath_t &srcPath, MMKVFileHandle_t dstFD);
 extern bool copyFileContent(const MMKVPath_t &srcPath, MMKVFileHandle_t dstFD, bool needTruncate);
+
+//#if defined(MMKV_APPLE) || defined(MMKV_WIN32)
+bool isDiskOfMMAPFileCorrupted(MemoryFile *file, bool &needReportReadFail);
+//#endif
+
+bool deleteFile(const MMKVPath_t &path);
 
 enum WalkType : uint32_t {
     WalkFile = 1 << 0,
